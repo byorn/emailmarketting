@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html>  
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    
+    <button class="menuButton" id="menuCusButton">Customers </button>
+    
+    <button class="menuButton" id="menuFlyButton">Flyers </button>
+    
+    <button class="menuButton" id="menuDesButton" style="display: none;">Design Flyer</button>
+    
+     <button class="menuButton" id="menuImgButton">Images </button>
+    
+    <button class="menuButton" id="menuSetButton">System Settiings </button>
+    
+    
+    <script>
+        
+        $(function(){
+            
+            $("#cusSection").show();
+           $("#flySection").hide();
+             $("#setSection").hide(500);
+            $("#imgSection").hide(500);
+            
+            $("#menuCusButton").click(function(){
+               
+                $("#cusSection").show(500);
+                $("#flySection").hide(500);
+                $("#setSection").hide(500);
+                $("#imgSection").hide(500);
+               
+           });
+            
+            $("#menuFlyButton").click(function(){
+               
+                $("#cusSection").hide(500);
+                $("#flySection").show(500);
+                $("#setSection").hide(500);
+                $("#imgSection").hide(500);
+       
+               
+           });
+           
+           //menuSetButton
+           $("#menuSetButton").click(function(){
+               
+                $("#cusSection").hide(500);
+                $("#flySection").hide(500);
+                $("#setSection").show(500);
+                $("#imgSection").hide(500);
+             
+       
+               
+           });
+           
+          
+           
+           
+           //menuDesButton
+           $("#menuImgButton").click(function(){
+               
+                $("#cusSection").hide(500);
+                $("#flySection").show(500);
+                $("#setSection").hide(500);
+                $("#imgSection").show(500);
+             
+       
+               
+           });
+           
+        });
+        
+        
+    </script>    
+    
+    <style>
+        
+        /***FIRST STYLE THE BUTTON***/
+.menuButton {
+border:2px groove #7c93ba;
+cursor:pointer; /*forces the cursor to change to a hand when the button is hovered*/
+padding: 5px 25px;
+/*give the background a gradient - see cssdemos.tupence.co.uk/gradients.htm for more info*/
+background-color:#6b6dbb; /*required for browsers that don't support gradients*/
+background: -webkit-gradient(linear, left top, left bottom, from(#88add7), to(#6b6dbb));
+background: -webkit-linear-gradient(top, #88add7, #6b6dbb);
+background: -moz-linear-gradient(top, #88add7, #6b6dbb);
+background: -o-linear-gradient(top, #88add7, #6b6dbb);
+background: linear-gradient(top, #88add7, #6b6dbb);
+/*style to the text inside the button*/
+font-family:Andika, Arial, sans-serif; /*Andkia is available at http://www.google.com/webfonts/specimen/Andika*/
+color:#fff;
+font-size:1.1em;
+letter-spacing:.1em;
+font-variant:small-caps;
+/*give the corners a small curve*/
+-webkit-border-radius: 0 15px 15px 0;
+-moz-border-radius: 0 15px 15px 0;
+border-radius: 0 15px 15px 0;
+/*add a drop shadow to the button*/
+-webkit-box-shadow: rgba(0, 0, 0, .75) 0 2px 6px;
+-moz-box-shadow: rgba(0, 0, 0, .75) 0 2px 6px;
+box-shadow: rgba(0, 0, 0, .75) 0 2px 6px;
+}
+/***NOW STYLE THE BUTTON'S HOVER AND FOCUS STATES***/
+input#submitbutton:hover, input#submitbutton:focus {
+color:#edebda;
+/*reduce the spread of the shadow to give a pushed effect*/
+-webkit-box-shadow: rgba(0, 0, 0, .25) 0 1px 0px;
+-moz-box-shadow: rgba(0, 0, 0, .25) 0 1px 0px;
+box-shadow: rgba(0, 0, 0, .25) 0 1px 0px;
+}
+        
+        
+        
+    </style>
+    
+</html>
+
+
+

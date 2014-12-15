@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html>  
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:form id="setForm" prependId="false">
+        <p:messages autoUpdate="true"/>
+        
+        <p:panel header="Manage Settings">
+
+            <h:panelGrid  columns="9" title="Settings">
+
+                <h:outputLabel value="Code"/>
+                <h:inputText value="#{settingsController.searchSettings.name}"></h:inputText>
+                <p:commandButton id="setSearchButton" value="Search" action="#{settingsController.search()}" update="set_dataTable" icon="ui-icon-search" />
+                <p:commandButton value="New"   
+                                 action="#{settingsController.prepareForNew()}"
+                                 process="@this"
+                                 update=":set_editsection" icon="ui-icon-newwin" 
+                                 oncomplete="PF('dlg_set').show()"
+                                 />
+                
+
+            </h:panelGrid>
+
+
+            <p:dataTable id="set_dataTable" var="seter" value="#{settingsController.settingss}" rowKey="#{seter.id}" 
+                         selection="#{settingsController.selectedSettingss}">
+
+                <p:column selectionMode="multiple" style="width:2%" />  
+                
+                <p:column sortBy="name" headerText="Name">
+                    <h:outputText value="#{seter.name}" />
+                </p:column>
+
+                <p:column sortBy="value" headerText="Value">
+                    <h:outputText value="#{seter.value}" />
+                </p:column>
+                
+                <p:column>
+
+                    <p:commandButton  
+                                      value="Edit"
+                                      icon="ui-icon-document-b"
+                                      process="@this"
+                                      action="#{settingsController.prepareForEdit(seter.id)}"
+                                      update=":set_editsection"    
+                                      oncomplete="PF('dlg_set').show()"
+                                      />
+                    
+               
+                    
+                    
+                   
+                </p:column>
+            </p:dataTable>
+        </p:panel>
+           </h:form> 
+    
+
+      
+
+    <p:outputPanel id="set_editsection" >
+        
+          
+          
+                <p:dialog header="" widgetVar="dlg_set" resizable="true">
+            <h:form>
+                 <h:panelGrid  columns="4" cellpadding="5">
+
+                    <h:outputLabel for="name" value="Name" style="font-weight:bold"/>
+                    <p:inputText id="name" value="#{settingsController.settings.name}" required="true" label="Name"/>
+                    <p:message for="name"  />
+                    <h:outputText value="" />
+                    
+                    <h:outputLabel for="value" value="Value" style="font-weight:bold"/>
+                    <p:inputText id="value" value="#{settingsController.settings.value}" required="true" label="Value"/>
+                    <p:message for="value"  />
+                    <h:outputText value="" />
+                    
+                    
+                    <h:outputLabel for="code" value="Code" style="font-weight:bold"/>
+                        
+                    <p:inputText rendered="#{!settingsController.editMode}"  id="code" value="#{settingsController.settings.code}" required="true" label="Code"/>
+                        
+                    <p:outputLabel rendered="#{settingsController.editMode}" value="#{settingsController.settings.code}"/>
+                        
+                        
+                    <p:message for="code"  />
+                    <h:outputText value="" />
+
+                    
+                                    
+                    
+              
+                </h:panelGrid>
+
+                <p:commandButton value="Save" action="#{settingsController.save()}" process=":set_editsection" update=":set_editsection" 
+                                 oncomplete="handleSettingsSaveRequest(xhr, status, args);"   icon="ui-icon-check" />
+                
+                 <p:remoteCommand name="searchSettings" process="@this" update=":setForm:set_dataTable" action="#{settingsController.search()}" />
+                
+            </h:form>
+            </p:dialog>    
+            
+        </p:outputPanel>
+    
+    
+    
+       
+
+      
+
+    
+ 
+   
+    <script type="text/javascript">  
+    function handleSettingsSaveRequest(xhr, status, args) {  
+        if(args.validationFailed) {  
+            
+            PF('dlg_set').show();
+            
+            PF('dlg_set').jq.effect("shake", { times:5 }, 100);  
+           
+        }   
+        else {  
+            searchSettings();
+            PF('dlg_set').hide();  
+          
+        }  
+    }
+    
+    
+</script> 
+     
+</html>
+
+
+

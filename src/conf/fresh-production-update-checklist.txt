@@ -1,0 +1,7 @@
+1) in appconfig folder - log4j.xml path needs to point the correct logs folder
+2) web.xml should point to the  correct appconfig folder to locate the configs.
+3) persistence.xml need to point to correct database.
+4) run the sql script.
+5) Copy the login.jaas to conf folder
+6) edit the catalina.sh
+7) restart tomcat

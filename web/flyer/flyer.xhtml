@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html>  
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:form id="flyForm" prependId="false">
+        <p:messages autoUpdate="true"/>
+        
+        <p:panel header="Manage Flyers">
+
+            <h:panelGrid  columns="9" title="Flyers">
+
+                <h:outputLabel value="Flyer Name"/>
+                <h:inputText value="#{flyerController.searchFlyer.name}"></h:inputText>
+                <p:commandButton id="flySearchButton" value="Search" action="#{flyerController.search()}" update="fly_dataTable" icon="ui-icon-search" />
+                <p:commandButton value="New"   
+                                 action="#{flyerController.prepareForNew()}"
+                                 process="@this"
+                                 icon="ui-icon-newwin" 
+                                 update=":panelDesignerFrm"
+                                 oncomplete=" PF('dlg_designer').show();"
+                                 />
+                
+
+            </h:panelGrid>
+
+
+            <p:dataTable id="fly_dataTable" var="flyer" value="#{flyerController.flyers}" rowKey="#{flyer.id}" 
+                         selection="#{flyerController.selectedFlyers}">
+
+               
+                
+                <p:column sortBy="name" headerText="Name">
+                    <h:outputText value="#{flyer.name}" />
+                </p:column>
+
+                
+                <p:column>
+
+                    <p:commandButton  
+                                      value="Edit"
+                                      icon="ui-icon-document-b"
+                                      process="@this"
+                                      action="#{flyerController.prepareForEdit(flyer.id)}"
+                                      update=":panelDesignerFrm"
+                                      oncomplete=" PF('dlg_designer').show();"
+                                      />
+                    
+                    
+                    
+                    
+                    
+                    <p:commandButton  
+                                      value="Attachements"
+                                      icon="ui-icon-document-b"
+                                      process="@this"
+                                      action="#{flyerController.prepareForEdit(flyer.id)}"
+                                      update=":fly_attachsection"    
+                                      oncomplete="PF('dlg_attach').show()"
+                                      />
+                    
+                    
+                    
+                    <p:commandButton  value="Delete"
+                                      process="@this"
+                                      update="fly_dataTable"
+                                      icon="ui-icon-document-b" action="#{flyerController.delete(flyer.id)}"/>
+                    
+                    
+                   
+                </p:column>
+            </p:dataTable>
+            
+               
+        </p:panel>
+           </h:form> 
+    
+
+        
+    
+        
+
+    <p:outputPanel id="fly_attachsection" >
+        <p:dialog header="" widgetVar="dlg_attach" resizable="true" width="1100">
+           <h:form enctype="multipart/form-data">
+                <h:panelGrid  columns="2" cellpadding="5">
+                    <h:outputLabel for="fileUpload" value="Add an attachement" style="font-weight:bold"/>				
+                    <p:fileUpload  id="fileUpload" fileUploadListener="#{flyerController.handleFileUpload}" mode="advanced" 
+                                   oncomplete="PF('dlg_attach').hide();" sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />  
+                  
+                    
+                    
+                    <h:outputLabel  value="Download attachement" style="font-weight:bold"/>				
+                   <p:commandButton id="downloadLink" oncomplete="PF('dlg_attach').hide();"  value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop)"  icon="ui-icon-arrowthichk-s">  
+                       <p:fileDownload value="#{flyerController.flyer.fileAttachementDownload}" />  
+                   </p:commandButton> 
+                    
+                </h:panelGrid>
+                
+              
+                
+                
+            </h:form>
+        </p:dialog>
+    </p:outputPanel>
+    
+    <p:dialog header="" widgetVar="dlg_designer" resizable="true" width="1100">
+        <ui:include src="designer.xhtml"/>
+    </p:dialog>
+    
+    
+    
+       
+
+      
+
+    
+ 
+   
+    <script type="text/javascript">  
+   
+    
+    function start() {  
+         PF('statusDialog').show();  
+    }  
+  
+    function stop() {  
+        PF('statusDialog').hide();  
+    }  
+    
+    
+</script> 
+     
+</html>
+
+
+

@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html>  
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+
+    <h:form id="form" prependId="false">  
+        
+        <p:commandButton value="Refresh" update="email_status" action="#{emailStatusController.checkQueue()}"/>  
+        
+
+        <p:dataList id="email_status" value="#{emailStatusController.emailStatusLIst}" var="emailstatus" itemType="square">  
+            #{emailstatus.flyerId.name},  #{emailstatus.customerId.email}
+        </p:dataList>  
+
+       <!--       To be called when a email button is clicked -->
+       <p:remoteCommand name="showEmailsQueued" update="email_status" action="#{emailStatusController.checkQueue()}"/>  
+       
+        
+       
+    </h:form>  
+
+
+    <style>
+        
+        #email_status{
+            
+           font-size:0.8em;
+            
+        }
+        
+    </style>
+
+</html>
+
+
+

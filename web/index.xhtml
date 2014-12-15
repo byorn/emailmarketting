@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html>  
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+
+ <ui:composition template="/template.xhtml">
+        <p:growl id="growl" showDetail="true"/>          
+        
+        <ui:define name="theApp">
+            <section id="cusSection"><ui:include src="customer/customer.xhtml"/></section>
+            <section id="flySection"><ui:include src="flyer/flyer.xhtml"/></section>
+            <section id="setSection"><ui:include src="settings/settings.xhtml"/></section>
+            <section id="imgSection"><ui:include src="flyer/images.xhtml"/></section>
+        </ui:define>
+        
+    
+ </ui:composition>
+    
+
+</html>
+        
+

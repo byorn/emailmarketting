@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html>  
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+
+ <p:outputPanel id="panelDesignerFrm">
+ <h:form>
+     
+     <h:panelGrid columns="2">
+     
+                <h:panelGrid  columns="4" cellpadding="6"> 
+
+                    <h:outputLabel for="name" value="Name" style="font-weight:bold"/>
+                    <p:inputText id="name" value="#{flyerController.flyer.name}" required="true" label="Name"/>
+                    <p:message for="name"  />
+                    <h:outputText value="" />
+
+
+                    <h:outputLabel  value="HTML Content" style="font-weight:bold; "/>	
+                    <p:editor id="editor" value="#{flyerController.flyer.htmlContent}"  width="600" height="800">  </p:editor>
+                    <h:outputText value="" />
+                    <h:outputText value="" />
+
+                    <h:outputText value="" />
+                    <p:commandButton value="Save" action="#{flyerController.save()}" process=":panelDesignerFrm" update=":panelDesignerFrm" 
+                                 oncomplete="handleFlyerSaveRequest(xhr, status, args);"   icon="ui-icon-check" />
+                    <h:outputText value="" />
+                    
+                    <h:outputText value="" />
+
+
+
+                </h:panelGrid>
+     
+                <p:scrollPanel style="width:300px;height:900px;">  
+                        <p:dataGrid var="image" value="#{imageController.images}" columns="1">  
+                            <p:panel header="#{image.name}">
+                                <p:commandLink action="#{flyerController.prepareImageForAdding(image.id)}" process="@this" update=":designer_addImage" oncomplete="PF('dlg_addImage').show();">
+                                    <h:graphicImage value="/ImageServlet?image_id=#{image.id}" height="100px" width="100px"   />
+                                </p:commandLink>
+                            </p:panel>
+                        </p:dataGrid>  
+                </p:scrollPanel>
+
+              </h:panelGrid>
+                 
+     <p:remoteCommand name="searchFlyers" process="@this" update=":flyForm:fly_dataTable" action="#{flyerController.search()}" />
+                  
+            
+             
+            </h:form>
+ </p:outputPanel>
+    
+    <p:outputPanel id="designer_addImage" >
+        <p:dialog header="" widgetVar="dlg_addImage" resizable="true" width="1100">
+           <h:form enctype="multipart/form-data">
+                <h:panelGrid  columns="2" cellpadding="5">
+                    
+                    <h:outputLabel  value="Width" style="font-weight:bold"/>				
+                    <p:inputText value="#{flyerController.imageBean.width}" />
+                    
+                    <h:outputLabel  value="Width" style="font-weight:bold"/>				
+                    <p:inputText  value="#{flyerController.imageBean.height}" />
+                    
+                    <h:outputLabel value="URL to go to when clicked" style="font-weight:bold"/>				
+                    <p:inputText value="#{flyerController.imageBean.theLinkWhenImageIsClicked}" />
+                    
+                    <h:outputLabel value="Link" style="font-weight:bold"/>				
+                    <p:inputText value="#{flyerController.imageBean.url}" />
+                    
+                    <h:outputText value=""/>
+                    <p:commandButton value="Add" action="#{flyerController.addImageToContentArea()}" process="@(form)" update=":panelDesignerFrm" oncomplete="PF('dlg_addImage').hide();"/>
+                    
+                </h:panelGrid>
+              
+            </h:form>
+        </p:dialog>
+    </p:outputPanel>
+ 
+    
+    
+    <script type="text/javascript">  
+    function handleFlyerSaveRequest(xhr, status, args) {  
+        if(args.validationFailed) {  
+           PF('dlg_designer').show();
+            
+            PF('dlg_designer').jq.effect("shake", { times:5 }, 100);  
+        }   
+        else {  
+            searchFlyers();
+             PF('dlg_designer').hide();
+          
+        }  
+    }
+    
+    
+</script> 
+    
+</html>
+
+
+
