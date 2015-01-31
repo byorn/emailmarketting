@@ -1,15 +1,20 @@
 emailmarketting
 ===============
 
-A Single Page Web App for the Email Marketing domain
+A Single Page Web App for the Email Marketing domain. 
+Note: This is Work In Progress.
 
-<b>Prerequisites</b>
-<ul>
+<b>Technologies:</b>
+JSF, JQuery, Primefaces, & Hibernate 4 running on Glassfish 4.1
+
+<b>Steps to install</b>
+<ol>
 <li>Install XAMP or LAMP </li>
 <li>Create a database called ehammer</li>
-<li>Run the SQL Script to create the tables.</li>
-<li>Make sure the file paths in the Web.xml exist.</li>
-</ul>
+<li>Run the SQL Script to create the tables. Sql script can be found in: src/conf/ehammer.sql</li>
+<li>Open the project in Netbeans. Resolve all the library dependencies , libs can be found in EHammer/lib folder </li>
+<li>Make sure the file paths mentioned in the Web.xml exist.</li>
+</ol>
 
 <b>Technical Features To Notice</b>
 <ul>
