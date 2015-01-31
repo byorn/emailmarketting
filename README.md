@@ -1,5 +1,5 @@
-emailmarketting
-===============
+Email Marketting - Prime Faces & Hibernate 4
+=====================================================
 
 A Single Page Web App for the Email Marketing domain. 
 Note: This is Work In Progress.
