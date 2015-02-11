@@ -8,7 +8,7 @@ More details of the project can be found in:
 http://byorns.blogspot.com/2014_12_01_archive.html
 
 <b>Technologies:</b>
-JSF, JQuery, Primefaces, & Hibernate 4 running on Glassfish 4.1
+JSF, JQuery, Primefaces, & Hibernate 4 running on Glassfish 4.1 on Netbeans IDE
 
 <b>Steps to install</b>
 <ol>
